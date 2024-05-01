@@ -57,7 +57,8 @@ public class Generator : MonoBehaviour
 	{
 		trackList.Add(Vector2Int.zero);
 		lineRenderer = GetComponent<LineRenderer>();
-	}
+        StartCoroutine(TimeGen(0.1f));
+    }
 
 	private void Update()
 	{
@@ -73,5 +74,13 @@ public class Generator : MonoBehaviour
 			PrintTrack();
 			ShowTrack();
 		}
+	}
+
+	IEnumerator TimeGen(float time)
+	{
+		GenerateTrack();
+		ShowTrack();
+        yield return new WaitForSeconds(time);
+		StartCoroutine(TimeGen(time));
 	}
 }
